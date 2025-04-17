@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amharic Online Keyboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            font-size: 18px;
+            font-family: 'Noto Sans Ethiopic', 'Nyala', Arial, sans-serif;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+        textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        p {
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Amharic Online Keyboard</h1>
+        <textarea id="inputText" placeholder="Start typing..." rows="5" cols="50"></textarea>
+        <p><strong>Instructions:</strong> Type mappings like 'me' = መ, 'mu' = ሙ, 'm' = ም, etc. Use space to separate.</p>
+    </div>
+    <script>
+        const inputText = document.getElementById('inputText');
+        let buffer = '';
+
+        const amharicMap = {
+            'me': 'መ',
+            'mu': 'ሙ',
+            'mi': 'ሚ',
+            'ma': 'ማ',
+            'mee': 'ሜ',
+            'm': 'ም',
+            'mo': 'ሞ',
+            'mua': 'ሟ'
+        };
+
+        inputText.addEventListener('keyup', (e) => {
+            const key = e.key;
+            const value = inputText.value;
+
+            // Handle backspace
+            if (key === 'Backspace') {
+                buffer = buffer.slice(0, -1);
+                return;
+            }
+
+            // Only process alphabetic characters for buffer
+            if (key.match(/[a-zA-Z]/)) {
+                buffer += key.toLowerCase();
+            }
+
+            // Check for matches in amharicMap
+            let matched = false;
+            for (const [seq, char] of Object.entries(amharicMap)) {
+                if (buffer.endsWith(seq)) {
+                    inputText.value = value.slice(0, -seq.length) + char;
+                    buffer = '';
+                    matched = true;
+                    break;
+                }
+            }
+
+            // Reset buffer on space or non-alphabetic characters
+            if (key === ' ' || key.match(/[^a-zA-Z]/)) {
+                buffer = '';
+            }
+
+            // Debug: Uncomment to see buffer state
+            // console.log('Buffer:', buffer, 'Value:', inputText.value);
+        });
+
+        // Focus textarea on page load
+        inputText.focus();
+    </script>
+</body>
+</html>
