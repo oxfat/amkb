@@ -21,6 +21,8 @@
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
         }
         h1 {
             color: #333;
@@ -35,6 +37,7 @@
             border: 2px solid #ccc;
             border-radius: 5px;
             resize: vertical;
+            min-height: 150px;
         }
         textarea:focus {
             border-color: #007bff;
@@ -44,62 +47,274 @@
             color: #555;
             margin-top: 10px;
         }
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .keyboard button {
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Noto Sans Ethiopic', sans-serif;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .keyboard button:hover {
+            background-color: #e9ecef;
+        }
+        .keyboard button:active {
+            background-color: #dee2e6;
+            transform: scale(0.95);
+        }
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .keyboard-key {
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Noto Sans Ethiopic', sans-serif;
+            font-size: 16px;
+        }
+        .keyboard-key.space {
+            width: 200px;
+        }
+        .keyboard-key.backspace {
+            width: 80px;
+        }
+        .keyboard-key.enter {
+            width: 80px;
+        }
+        .instructions {
+            margin-top: 20px;
+            text-align: left;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Amharic Online Keyboard</h1>
-        <textarea id="inputText" placeholder="Start typing..." rows="5" cols="50"></textarea>
-        <p><strong>Instructions:</strong> Type mappings like 'me' = መ, 'mu' = ሙ, 'm' = ም, etc. Use space to separate.</p>
+        <textarea id="inputText" placeholder="Start typing here or click the Amharic characters below..." rows="5" cols="50"></textarea>
+        
+        <div class="keyboard">
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-char="ሀ">ሀ</div>
+                <div class="keyboard-key" data-char="ለ">ለ</div>
+                <div class="keyboard-key" data-char="ሐ">ሐ</div>
+                <div class="keyboard-key" data-char="መ">መ</div>
+                <div class="keyboard-key" data-char="ሠ">ሠ</div>
+                <div class="keyboard-key" data-char="ረ">ረ</div>
+                <div class="keyboard-key" data-char="ሰ">ሰ</div>
+                <div class="keyboard-key" data-char="ሸ">ሸ</div>
+                <div class="keyboard-key" data-char="ቀ">ቀ</div>
+                <div class="keyboard-key" data-char="በ">በ</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-char="ተ">ተ</div>
+                <div class="keyboard-key" data-char="ቸ">ቸ</div>
+                <div class="keyboard-key" data-char="ኀ">ኀ</div>
+                <div class="keyboard-key" data-char="ነ">ነ</div>
+                <div class="keyboard-key" data-char="ኘ">ኘ</div>
+                <div class="keyboard-key" data-char="አ">አ</div>
+                <div class="keyboard-key" data-char="ከ">ከ</div>
+                <div class="keyboard-key" data-char="ኸ">ኸ</div>
+                <div class="keyboard-key" data-char="ወ">ወ</div>
+                <div class="keyboard-key" data-char="ዐ">ዐ</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-char="ዘ">ዘ</div>
+                <div class="keyboard-key" data-char="ዠ">ዠ</div>
+                <div class="keyboard-key" data-char="የ">የ</div>
+                <div class="keyboard-key" data-char="ደ">ደ</div>
+                <div class="keyboard-key" data-char="ጀ">ጀ</div>
+                <div class="keyboard-key" data-char="ገ">ገ</div>
+                <div class="keyboard-key" data-char="ጠ">ጠ</div>
+                <div class="keyboard-key" data-char="ጨ">ጨ</div>
+                <div class="keyboard-key" data-char="ጰ">ጰ</div>
+                <div class="keyboard-key" data-char="ፀ">ፀ</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-char="ፈ">ፈ</div>
+                <div class="keyboard-key" data-char="ፐ">ፐ</div>
+                <div class="keyboard-key" data-char="ቁ">ቁ</div>
+                <div class="keyboard-key" data-char="ኁ">ኁ</div>
+                <div class="keyboard-key" data-char="ኩ">ኩ</div>
+                <div class="keyboard-key" data-char="ዩ">ዩ</div>
+                <div class="keyboard-key" data-char="ጩ">ጩ</div>
+                <div class="keyboard-key" data-char="ፉ">ፉ</div>
+                <div class="keyboard-key" data-char=" ">Space</div>
+                <div class="keyboard-key backspace" data-action="backspace">⌫</div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <p><strong>Typing Method:</strong> Type phonetic equivalents and they will convert to Amharic characters.</p>
+            <p><strong>Examples:</strong></p>
+            <ul>
+                <li>me = መ</li>
+                <li>mu = ሙ</li>
+                <li>mi = ሚ</li>
+                <li>ma = ማ</li>
+                <li>mee = ሜ</li>
+                <li>m = ም</li>
+                <li>mo = ሞ</li>
+                <li>mua = ሟ</li>
+            </ul>
+            <p>Press space or punctuation to complete a character.</p>
+            <p>You can also click on the Amharic characters above to insert them directly.</p>
+        </div>
     </div>
     <script>
         const inputText = document.getElementById('inputText');
         let buffer = '';
+        let cursorPosition = 0;
 
+        // Extended Amharic mapping with more characters
         const amharicMap = {
-            'me': 'መ',
-            'mu': 'ሙ',
-            'mi': 'ሚ',
-            'ma': 'ማ',
-            'mee': 'ሜ',
-            'm': 'ም',
-            'mo': 'ሞ',
-            'mua': 'ሟ'
+            // Basic characters
+            'ha': 'ሀ', 'hu': 'ሁ', 'hi': 'ሂ', 'haa': 'ሃ', 'hee': 'ሄ', 'he': 'ህ', 'ho': 'ሆ',
+            'la': 'ለ', 'lu': 'ሉ', 'li': 'ሊ', 'laa': 'ላ', 'lee': 'ሌ', 'le': 'ል', 'lo': 'ሎ', 'lwa': 'ሏ',
+            'hha': 'ሐ', 'hhu': 'ሑ', 'hhi': 'ሒ', 'hhaa': 'ሓ', 'hhee': 'ሔ', 'hhe': 'ሕ', 'hho': 'ሖ', 'hhwa': 'ሗ',
+            'me': 'መ', 'mu': 'ሙ', 'mi': 'ሚ', 'ma': 'ማ', 'mee': 'ሜ', 'm': 'ም', 'mo': 'ሞ', 'mua': 'ሟ',
+            'sse': 'ሠ', 'ssu': 'ሡ', 'ssi': 'ሢ', 'ssa': 'ሣ', 'ssee': 'ሤ', 'sse': 'ሥ', 'sso': 'ሦ', 'sswa': 'ሧ',
+            'ra': 'ረ', 'ru': 'ሩ', 'ri': 'ሪ', 'raa': 'ራ', 'ree': 'ሬ', 're': 'ር', 'ro': 'ሮ', 'rwa': 'ሯ',
+            'sa': 'ሰ', 'su': 'ሱ', 'si': 'ሲ', 'saa': 'ሳ', 'see': 'ሴ', 'se': 'ስ', 'so': 'ሶ', 'swa': 'ሷ',
+            'sha': 'ሸ', 'shu': 'ሹ', 'shi': 'ሺ', 'shaa': 'ሻ', 'shee': 'ሼ', 'she': 'ሽ', 'sho': 'ሾ', 'shwa': 'ሿ',
+            'qa': 'ቀ', 'qu': 'ቁ', 'qi': 'ቂ', 'qaa': 'ቃ', 'qee': 'ቄ', 'qe': 'ቅ', 'qo': 'ቆ', 'qoa': 'ቈ', 'qwa': 'ቋ',
+            'ba': 'በ', 'bu': 'ቡ', 'bi': 'ቢ', 'baa': 'ባ', 'bee': 'ቤ', 'be': 'ብ', 'bo': 'ቦ', 'bwa': 'ቧ',
+            'ta': 'ተ', 'tu': 'ቱ', 'ti': 'ቲ', 'taa': 'ታ', 'tee': 'ቴ', 'te': 'ት', 'to': 'ቶ', 'twa': 'ቷ',
+            'cha': 'ቸ', 'chu': 'ቹ', 'chi': 'ቺ', 'chaa': 'ቻ', 'chee': 'ቼ', 'che': 'ች', 'cho': 'ቾ', 'chwa': 'ቿ',
+            'hhaa': 'ኀ', 'hhu': 'ኁ', 'hhi': 'ኂ', 'hhaa': 'ኃ', 'hhee': 'ኄ', 'hhe': 'ኅ', 'hho': 'ኆ', 'hhwa': 'ኋ',
+            'na': 'ነ', 'nu': 'ኑ', 'ni': 'ኒ', 'naa': 'ና', 'nee': 'ኔ', 'ne': 'ን', 'no': 'ኖ', 'nwa': 'ኗ',
+            'nya': 'ኘ', 'nyu': 'ኙ', 'nyi': 'ኚ', 'nyaa': 'ኛ', 'nyee': 'ኜ', 'nye': 'ኝ', 'nyo': 'ኞ', 'nywa': 'ኟ',
+            'a': 'አ', 'u': 'ኡ', 'i': 'ኢ', 'aa': 'ኣ', 'ee': 'ኤ', 'e': 'እ', 'o': 'ኦ', 'oa': 'ኧ',
+            'ka': 'ከ', 'ku': 'ኩ', 'ki': 'ኪ', 'kaa': 'ካ', 'kee': 'ኬ', 'ke': 'ክ', 'ko': 'ኮ', 'kwa': 'ኳ',
+            'kxa': 'ኸ', 'kxu': 'ኹ', 'kxi': 'ኺ', 'kxaa': 'ኻ', 'kxee': 'ኼ', 'kxe': 'ኽ', 'kxo': 'ኾ', 'kxwa': 'ዃ',
+            'wa': 'ወ', 'wu': 'ዉ', 'wi': 'ዊ', 'waa': 'ዋ', 'wee': 'ዌ', 'we': 'ው', 'wo': 'ዎ',
+            'a': 'ዐ', 'u': 'ዑ', 'i': 'ዒ', 'aa': 'ዓ', 'ee': 'ዔ', 'e': 'ዕ', 'o': 'ዖ',
+            'za': 'ዘ', 'zu': 'ዙ', 'zi': 'ዚ', 'zaa': 'ዛ', 'zee': 'ዜ', 'ze': 'ዝ', 'zo': 'ዞ', 'zwa': 'ዟ',
+            'zha': 'ዠ', 'zhu': 'ዡ', 'zhi': 'ዢ', 'zhaa': 'ዣ', 'zhee': 'ዤ', 'zhe': 'ዥ', 'zho': 'ዦ', 'zhwa': 'ዧ',
+            'ya': 'የ', 'yu': 'ዩ', 'yi': 'ዪ', 'yaa': 'ያ', 'yee': 'ዬ', 'ye': 'ይ', 'yo': 'ዮ',
+            'da': 'ደ', 'du': 'ዱ', 'di': 'ዲ', 'daa': 'ዳ', 'dee': 'ዴ', 'de': 'ድ', 'do': 'ዶ', 'dwa': 'ዷ',
+            'ja': 'ጀ', 'ju': 'ጁ', 'ji': 'ጂ', 'jaa': 'ጃ', 'jee': 'ጄ', 'je': 'ጅ', 'jo': 'ጆ', 'jwa': 'ጇ',
+            'ga': 'ገ', 'gu': 'ጉ', 'gi': 'ጊ', 'gaa': 'ጋ', 'gee': 'ጌ', 'ge': 'ግ', 'go': 'ጎ', 'gwa': 'ጓ',
+            'tta': 'ጠ', 'ttu': 'ጡ', 'tti': 'ጢ', 'ttaa': 'ጣ', 'ttee': 'ጤ', 'tte': 'ጥ', 'tto': 'ጦ', 'ttwa': 'ጧ',
+            'ccha': 'ጨ', 'cchu': 'ጩ', 'cchi': 'ጪ', 'cchaa': 'ጫ', 'cchee': 'ጬ', 'cche': 'ጭ', 'ccho': 'ጮ', 'cchwa': 'ጯ',
+            'pa': 'ጰ', 'pu': 'ጱ', 'pi': 'ጲ', 'paa': 'ጳ', 'pee': 'ጴ', 'pe': 'ጵ', 'po': 'ጶ', 'pwa': 'ጷ',
+            'tsa': 'ፀ', 'tsu': 'ፁ', 'tsi': 'ፂ', 'tsaa': 'ፃ', 'tsee': 'ፄ', 'tse': 'ፅ', 'tso': 'ፆ', 'tswa': 'ፇ',
+            'fa': 'ፈ', 'fu': 'ፉ', 'fi': 'ፊ', 'faa': 'ፋ', 'fee': 'ፌ', 'fe': 'ፍ', 'fo': 'ፎ', 'fwa': 'ፏ',
+            'pa': 'ፐ', 'pu': 'ፑ', 'pi': 'ፒ', 'paa': 'ፓ', 'pee': 'ፔ', 'pe': 'ፕ', 'po': 'ፖ', 'pwa': 'ፗ',
+            
+            // Numbers
+            '1': '፩', '2': '፪', '3': '፫', '4': '፬', '5': '፭', '6': '፮', '7': '፯', '8': '፰', '9': '፱', '10': '፲',
+            '20': '፳', '30': '፴', '40': '፵', '50': '፶', '60': '፷', '70': '፸', '80': '፹', '90': '፺', '100': '፻'
         };
+
+        // Handle keyboard clicks
+        document.querySelectorAll('.keyboard-key').forEach(key => {
+            key.addEventListener('click', () => {
+                const char = key.getAttribute('data-char');
+                const action = key.getAttribute('data-action');
+                
+                if (action === 'backspace') {
+                    // Handle backspace
+                    const startPos = inputText.selectionStart;
+                    const endPos = inputText.selectionEnd;
+                    
+                    if (startPos === endPos && startPos > 0) {
+                        // No text selected, delete one character before cursor
+                        inputText.value = inputText.value.substring(0, startPos - 1) + inputText.value.substring(endPos);
+                        inputText.selectionStart = inputText.selectionEnd = startPos - 1;
+                    } else if (startPos !== endPos) {
+                        // Text is selected, delete the selection
+                        inputText.value = inputText.value.substring(0, startPos) + inputText.value.substring(endPos);
+                        inputText.selectionStart = inputText.selectionEnd = startPos;
+                    }
+                } else if (char) {
+                    // Insert character at cursor position
+                    const startPos = inputText.selectionStart;
+                    const endPos = inputText.selectionEnd;
+                    
+                    inputText.value = inputText.value.substring(0, startPos) + char + inputText.value.substring(endPos);
+                    inputText.selectionStart = inputText.selectionEnd = startPos + char.length;
+                }
+                
+                inputText.focus();
+            });
+        });
+
+        inputText.addEventListener('keydown', (e) => {
+            // Store cursor position before any changes
+            cursorPosition = inputText.selectionStart;
+            
+            // Handle backspace specially to maintain buffer
+            if (e.key === 'Backspace') {
+                const startPos = inputText.selectionStart;
+                const endPos = inputText.selectionEnd;
+                
+                if (startPos === endPos && startPos > 0) {
+                    // If deleting one character, update buffer
+                    buffer = buffer.slice(0, -1);
+                } else if (startPos !== endPos) {
+                    // If deleting a selection, reset buffer
+                    buffer = '';
+                }
+                return; // Allow default backspace behavior
+            }
+        });
 
         inputText.addEventListener('keyup', (e) => {
             const key = e.key;
-            const value = inputText.value;
-
-            // Handle backspace
-            if (key === 'Backspace') {
-                buffer = buffer.slice(0, -1);
-                return;
-            }
-
+            
+            // Don't process modifier keys
+            if (e.ctrlKey || e.altKey || e.metaKey) return;
+            
             // Only process alphabetic characters for buffer
-            if (key.match(/[a-zA-Z]/)) {
+            if (key.match(/^[a-zA-Z]$/)) {
                 buffer += key.toLowerCase();
-            }
-
-            // Check for matches in amharicMap
-            let matched = false;
-            for (const [seq, char] of Object.entries(amharicMap)) {
-                if (buffer.endsWith(seq)) {
-                    inputText.value = value.slice(0, -seq.length) + char;
-                    buffer = '';
-                    matched = true;
-                    break;
+                
+                // Check for matches in amharicMap (longest first)
+                const sequences = Object.keys(amharicMap).sort((a, b) => b.length - a.length);
+                
+                for (const seq of sequences) {
+                    if (buffer.endsWith(seq)) {
+                        const startPos = inputText.selectionStart;
+                        const endPos = inputText.selectionEnd;
+                        
+                        // Replace the sequence with the Amharic character
+                        const before = inputText.value.substring(0, startPos - seq.length);
+                        const after = inputText.value.substring(startPos);
+                        inputText.value = before + amharicMap[seq] + after;
+                        
+                        // Move cursor to after the inserted character
+                        const newCursorPos = startPos - seq.length + amharicMap[seq].length;
+                        inputText.selectionStart = inputText.selectionEnd = newCursorPos;
+                        
+                        buffer = '';
+                        break;
+                    }
                 }
-            }
-
-            // Reset buffer on space or non-alphabetic characters
-            if (key === ' ' || key.match(/[^a-zA-Z]/)) {
+            } else if (key === ' ' || key.match(/[^a-zA-Z]/)) {
+                // Reset buffer on space or non-alphabetic characters
                 buffer = '';
             }
-
-            // Debug: Uncomment to see buffer state
-            // console.log('Buffer:', buffer, 'Value:', inputText.value);
         });
 
         // Focus textarea on page load
