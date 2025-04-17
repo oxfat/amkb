@@ -1,11 +1,328 @@
-    <!-- ... existing HTML ... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amharic Online Keyboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            padding: 20px; /* Added padding for smaller screens */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%; /* Use full width up to max-width */
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em; /* Responsive font size */
+        }
+        textarea {
+            width: 100%; /* Make textarea responsive */
+            /* Removed max-width to allow full container width */
+            box-sizing: border-box; /* Include padding and border in width */
+            padding: 10px;
+            font-size: 18px;
+            font-family: 'Noto Sans Ethiopic', 'Nyala', Arial, sans-serif;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 150px;
+            margin-bottom: 20px; /* Add space below textarea */
+        }
+        textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        p {
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.6; /* Improve readability */
+        }
+        .keyboard {
+            display: flex; /* Use flexbox for better alignment */
+            flex-direction: column; /* Stack rows vertically */
+            gap: 8px; /* Increased gap */
+            margin-top: 20px;
+            align-items: center; /* Center rows */
+            width: 100%; /* Ensure keyboard takes full width */
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
+            padding-bottom: 10px; /* Add padding at the bottom */
+        }
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px; /* Increased gap */
+            width: 100%; /* Ensure rows take full width */
+            flex-wrap: wrap; /* Allow keys to wrap on smaller screens */
+        }
+        .keyboard-key {
+            min-width: 45px; /* Slightly larger keys */
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Noto Sans Ethiopic', sans-serif;
+            font-size: 18px; /* Larger font size */
+            transition: all 0.1s ease-in-out;
+            user-select: none; /* Prevent text selection on keys */
+            flex: 1 1 auto; /* Allow keys to grow and shrink */
+            max-width: 60px; /* Limit max width */
+        }
+        .keyboard-key:hover {
+            background-color: #e9ecef;
+            border-color: #bbb;
+        }
+        .keyboard-key:active {
+            background-color: #dee2e6;
+            transform: scale(0.96);
+        }
+        .keyboard-key.space {
+            min-width: 200px; /* Adjust width */
+            flex-grow: 5; /* Allow spacebar to take more space */
+            max-width: 300px;
+        }
+        .keyboard-key.backspace {
+            min-width: 80px; /* Adjust width */
+            flex-grow: 2;
+            max-width: 100px;
+        }
+        .keyboard-key.enter { /* Added Enter key style */
+            min-width: 80px;
+            flex-grow: 2;
+            max-width: 100px;
+        }
+        .instructions {
+            margin-top: 30px; /* Increased margin */
+            text-align: left;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #eee; /* Subtle border */
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #0056b3;
+        }
+        .instructions ul {
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            .keyboard-key {
+                min-width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            .keyboard-key.space {
+                min-width: 150px;
+            }
+            .keyboard-key.backspace, .keyboard-key.enter {
+                min-width: 60px;
+            }
+            .keyboard {
+                gap: 5px;
+            }
+             .keyboard-row {
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Amharic Online Keyboard</h1>
+        <textarea id="inputText" placeholder="Start typing here or click the Amharic characters below..." rows="6"></textarea>
+
+        <div class="keyboard">
+            <!-- Row 1 -->
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-char="ሀ">ሀ</div> <div class="keyboard-key" data-char="ሁ">ሁ</div> <div class="keyboard-key" data-char="ሂ">ሂ</div> <div class="keyboard-key" data-char="ሃ">ሃ</div> <div class="keyboard-key" data-char="ሄ">ሄ</div> <div class="keyboard-key" data-char="ህ">ህ</div> <div class="keyboard-key" data-char="ሆ">ሆ</div>
+                <div class="keyboard-key" data-char="ለ">ለ</div> <div class="keyboard-key" data-char="ሉ">ሉ</div> <div class="keyboard-key" data-char="ሊ">ሊ</div>
+            </div>
+             <!-- Row 2 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ላ">ላ</div> <div class="keyboard-key" data-char="ሌ">ሌ</div> <div class="keyboard-key" data-char="ል">ል</div> <div class="keyboard-key" data-char="ሎ">ሎ</div> <div class="keyboard-key" data-char="ሏ">ሏ</div>
+                 <div class="keyboard-key" data-char="መ">መ</div> <div class="keyboard-key" data-char="ሙ">ሙ</div> <div class="keyboard-key" data-char="ሚ">ሚ</div> <div class="keyboard-key" data-char="ማ">ማ</div> <div class="keyboard-key" data-char="ሜ">ሜ</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-char="ም">ም</div> <div class="keyboard-key" data-char="ሞ">ሞ</div> <div class="keyboard-key" data-char="ሟ">ሟ</div>
+                <div class="keyboard-key" data-char="ሰ">ሰ</div> <div class="keyboard-key" data-char="ሱ">ሱ</div> <div class="keyboard-key" data-char="ሲ">ሲ</div> <div class="keyboard-key" data-char="ሳ">ሳ</div> <div class="keyboard-key" data-char="ሴ">ሴ</div> <div class="keyboard-key" data-char="ስ">ስ</div> <div class="keyboard-key" data-char="ሶ">ሶ</div>
+            </div>
+            <!-- Row 4 -->
+             <div class="keyboard-row">
+                <div class="keyboard-key" data-char="ሷ">ሷ</div>
+                <div class="keyboard-key" data-char="ረ">ረ</div> <div class="keyboard-key" data-char="ሩ">ሩ</div> <div class="keyboard-key" data-char="ሪ">ሪ</div> <div class="keyboard-key" data-char="ራ">ራ</div> <div class="keyboard-key" data-char="ሬ">ሬ</div> <div class="keyboard-key" data-char="ር">ር</div> <div class="keyboard-key" data-char="ሮ">ሮ</div> <div class="keyboard-key" data-char="ሯ">ሯ</div>
+                <div class="keyboard-key" data-char="ሸ">ሸ</div>
+            </div>
+             <!-- Row 5 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ሹ">ሹ</div> <div class="keyboard-key" data-char="ሺ">ሺ</div> <div class="keyboard-key" data-char="ሻ">ሻ</div> <div class="keyboard-key" data-char="ሼ">ሼ</div> <div class="keyboard-key" data-char="ሽ">ሽ</div> <div class="keyboard-key" data-char="ሾ">ሾ</div> <div class="keyboard-key" data-char="ሿ">ሿ</div>
+                 <div class="keyboard-key" data-char="ቀ">ቀ</div> <div class="keyboard-key" data-char="ቁ">ቁ</div> <div class="keyboard-key" data-char="ቂ">ቂ</div>
+            </div>
+            <!-- Row 6 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ቃ">ቃ</div> <div class="keyboard-key" data-char="ቄ">ቄ</div> <div class="keyboard-key" data-char="ቅ">ቅ</div> <div class="keyboard-key" data-char="ቆ">ቆ</div> <div class="keyboard-key" data-char="ቋ">ቋ</div>
+                 <div class="keyboard-key" data-char="በ">በ</div> <div class="keyboard-key" data-char="ቡ">ቡ</div> <div class="keyboard-key" data-char="ቢ">ቢ</div> <div class="keyboard-key" data-char="ባ">ባ</div> <div class="keyboard-key" data-char="ቤ">ቤ</div>
+            </div>
+            <!-- Row 7 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ብ">ብ</div> <div class="keyboard-key" data-char="ቦ">ቦ</div> <div class="keyboard-key" data-char="ቧ">ቧ</div>
+                 <div class="keyboard-key" data-char="ተ">ተ</div> <div class="keyboard-key" data-char="ቱ">ቱ</div> <div class="keyboard-key" data-char="ቲ">ቲ</div> <div class="keyboard-key" data-char="ታ">ታ</div> <div class="keyboard-key" data-char="ቴ">ቴ</div> <div class="keyboard-key" data-char="ት">ት</div> <div class="keyboard-key" data-char="ቶ">ቶ</div>
+            </div>
+            <!-- Row 8 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ቷ">ቷ</div>
+                 <div class="keyboard-key" data-char="ቸ">ቸ</div> <div class="keyboard-key" data-char="ቹ">ቹ</div> <div class="keyboard-key" data-char="ቺ">ቺ</div> <div class="keyboard-key" data-char="ቻ">ቻ</div> <div class="keyboard-key" data-char="ቼ">ቼ</div> <div class="keyboard-key" data-char="ች">ች</div> <div class="keyboard-key" data-char="ቾ">ቾ</div> <div class="keyboard-key" data-char="ቿ">ቿ</div>
+                 <div class="keyboard-key" data-char="ነ">ነ</div>
+            </div>
+            <!-- Row 9 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ኑ">ኑ</div> <div class="keyboard-key" data-char="ኒ">ኒ</div> <div class="keyboard-key" data-char="ና">ና</div> <div class="keyboard-key" data-char="ኔ">ኔ</div> <div class="keyboard-key" data-char="ን">ን</div> <div class="keyboard-key" data-char="ኖ">ኖ</div> <div class="keyboard-key" data-char="ኗ">ኗ</div>
+                 <div class="keyboard-key" data-char="ኘ">ኘ</div> <div class="keyboard-key" data-char="ኙ">ኙ</div> <div class="keyboard-key" data-char="ኚ">ኚ</div>
+            </div>
+            <!-- Row 10 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ኛ">ኛ</div> <div class="keyboard-key" data-char="ኜ">ኜ</div> <div class="keyboard-key" data-char="ኝ">ኝ</div> <div class="keyboard-key" data-char="ኞ">ኞ</div> <div class="keyboard-key" data-char="ኟ">ኟ</div>
+                 <div class="keyboard-key" data-char="አ">አ</div> <div class="keyboard-key" data-char="ኡ">ኡ</div> <div class="keyboard-key" data-char="ኢ">ኢ</div> <div class="keyboard-key" data-char="ኣ">ኣ</div> <div class="keyboard-key" data-char="ኤ">ኤ</div>
+            </div>
+            <!-- Row 11 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="እ">እ</div> <div class="keyboard-key" data-char="ኦ">ኦ</div> <div class="keyboard-key" data-char="ኧ">ኧ</div>
+                 <div class="keyboard-key" data-char="ከ">ከ</div> <div class="keyboard-key" data-char="ኩ">ኩ</div> <div class="keyboard-key" data-char="ኪ">ኪ</div> <div class="keyboard-key" data-char="ካ">ካ</div> <div class="keyboard-key" data-char="ኬ">ኬ</div> <div class="keyboard-key" data-char="ክ">ክ</div> <div class="keyboard-key" data-char="ኮ">ኮ</div>
+            </div>
+            <!-- Row 12 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ኳ">ኳ</div>
+                 <div class="keyboard-key" data-char="ወ">ወ</div> <div class="keyboard-key" data-char="ዉ">ዉ</div> <div class="keyboard-key" data-char="ዊ">ዊ</div> <div class="keyboard-key" data-char="ዋ">ዋ</div> <div class="keyboard-key" data-char="ዌ">ዌ</div> <div class="keyboard-key" data-char="ው">ው</div> <div class="keyboard-key" data-char="ዎ">ዎ</div>
+                 <div class="keyboard-key" data-char="ዘ">ዘ</div> <div class="keyboard-key" data-char="ዙ">ዙ</div>
+            </div>
+             <!-- Row 13 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ዚ">ዚ</div> <div class="keyboard-key" data-char="ዛ">ዛ</div> <div class="keyboard-key" data-char="ዜ">ዜ</div> <div class="keyboard-key" data-char="ዝ">ዝ</div> <div class="keyboard-key" data-char="ዞ">ዞ</div> <div class="keyboard-key" data-char="ዟ">ዟ</div>
+                 <div class="keyboard-key" data-char="ዠ">ዠ</div> <div class="keyboard-key" data-char="ዡ">ዡ</div> <div class="keyboard-key" data-char="ዢ">ዢ</div> <div class="keyboard-key" data-char="ዣ">ዣ</div>
+            </div>
+             <!-- Row 14 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ዤ">ዤ</div> <div class="keyboard-key" data-char="ዥ">ዥ</div> <div class="keyboard-key" data-char="ዦ">ዦ</div> <div class="keyboard-key" data-char="ዧ">ዧ</div>
+                 <div class="keyboard-key" data-char="የ">የ</div> <div class="keyboard-key" data-char="ዩ">ዩ</div> <div class="keyboard-key" data-char="ዪ">ዪ</div> <div class="keyboard-key" data-char="ያ">ያ</div> <div class="keyboard-key" data-char="ዬ">ዬ</div> <div class="keyboard-key" data-char="ይ">ይ</div>
+            </div>
+             <!-- Row 15 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ዮ">ዮ</div>
+                 <div class="keyboard-key" data-char="ደ">ደ</div> <div class="keyboard-key" data-char="ዱ">ዱ</div> <div class="keyboard-key" data-char="ዲ">ዲ</div> <div class="keyboard-key" data-char="ዳ">ዳ</div> <div class="keyboard-key" data-char="ዴ">ዴ</div> <div class="keyboard-key" data-char="ድ">ድ</div> <div class="keyboard-key" data-char="ዶ">ዶ</div> <div class="keyboard-key" data-char="ዷ">ዷ</div>
+                 <div class="keyboard-key" data-char="ጀ">ጀ</div>
+            </div>
+             <!-- Row 16 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ጁ">ጁ</div> <div class="keyboard-key" data-char="ጂ">ጂ</div> <div class="keyboard-key" data-char="ጃ">ጃ</div> <div class="keyboard-key" data-char="ጄ">ጄ</div> <div class="keyboard-key" data-char="ጅ">ጅ</div> <div class="keyboard-key" data-char="ጆ">ጆ</div> <div class="keyboard-key" data-char="ጇ">ጇ</div>
+                 <div class="keyboard-key" data-char="ገ">ገ</div> <div class="keyboard-key" data-char="ጉ">ጉ</div> <div class="keyboard-key" data-char="ጊ">ጊ</div>
+            </div>
+             <!-- Row 17 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ጋ">ጋ</div> <div class="keyboard-key" data-char="ጌ">ጌ</div> <div class="keyboard-key" data-char="ግ">ግ</div> <div class="keyboard-key" data-char="ጎ">ጎ</div> <div class="keyboard-key" data-char="ጓ">ጓ</div>
+                 <div class="keyboard-key" data-char="ጠ">ጠ</div> <div class="keyboard-key" data-char="ጡ">ጡ</div> <div class="keyboard-key" data-char="ጢ">ጢ</div> <div class="keyboard-key" data-char="ጣ">ጣ</div> <div class="keyboard-key" data-char="ጤ">ጤ</div>
+            </div>
+             <!-- Row 18 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ጥ">ጥ</div> <div class="keyboard-key" data-char="ጦ">ጦ</div> <div class="keyboard-key" data-char="ጧ">ጧ</div>
+                 <div class="keyboard-key" data-char="ጨ">ጨ</div> <div class="keyboard-key" data-char="ጩ">ጩ</div> <div class="keyboard-key" data-char="ጪ">ጪ</div> <div class="keyboard-key" data-char="ጫ">ጫ</div> <div class="keyboard-key" data-char="ጬ">ጬ</div> <div class="keyboard-key" data-char="ጭ">ጭ</div> <div class="keyboard-key" data-char="ጮ">ጮ</div>
+            </div>
+             <!-- Row 19 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ጯ">ጯ</div>
+                 <div class="keyboard-key" data-char="ጰ">ጰ</div> <div class="keyboard-key" data-char="ጱ">ጱ</div> <div class="keyboard-key" data-char="ጲ">ጲ</div> <div class="keyboard-key" data-char="ጳ">ጳ</div> <div class="keyboard-key" data-char="ጴ">ጴ</div> <div class="keyboard-key" data-char="ጵ">ጵ</div> <div class="keyboard-key" data-char="ጶ">ጶ</div> <div class="keyboard-key" data-char="ጷ">ጷ</div>
+                 <div class="keyboard-key" data-char="ፀ">ፀ</div>
+            </div>
+             <!-- Row 20 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ፁ">ፁ</div> <div class="keyboard-key" data-char="ፂ">ፂ</div> <div class="keyboard-key" data-char="ፃ">ፃ</div> <div class="keyboard-key" data-char="ፄ">ፄ</div> <div class="keyboard-key" data-char="ፅ">ፅ</div> <div class="keyboard-key" data-char="ፆ">ፆ</div> <div class="keyboard-key" data-char="ፇ">ፇ</div>
+                 <div class="keyboard-key" data-char="ፈ">ፈ</div> <div class="keyboard-key" data-char="ፉ">ፉ</div> <div class="keyboard-key" data-char="ፊ">ፊ</div>
+            </div>
+             <!-- Row 21 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ፋ">ፋ</div> <div class="keyboard-key" data-char="ፌ">ፌ</div> <div class="keyboard-key" data-char="ፍ">ፍ</div> <div class="keyboard-key" data-char="ፎ">ፎ</div> <div class="keyboard-key" data-char="ፏ">ፏ</div>
+                 <div class="keyboard-key" data-char="ፐ">ፐ</div> <div class="keyboard-key" data-char="ፑ">ፑ</div> <div class="keyboard-key" data-char="ፒ">ፒ</div> <div class="keyboard-key" data-char="ፓ">ፓ</div> <div class="keyboard-key" data-char="ፔ">ፔ</div>
+            </div>
+             <!-- Row 22 -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="ፕ">ፕ</div> <div class="keyboard-key" data-char="ፖ">ፖ</div> <div class="keyboard-key" data-char="ፗ">ፗ</div>
+                 <!-- Special Characters -->
+                 <div class="keyboard-key" data-char="፡">፡</div> <div class="keyboard-key" data-char="።">።</div> <div class="keyboard-key" data-char="፣">፣</div> <div class="keyboard-key" data-char="፤">፤</div> <div class="keyboard-key" data-char="፥">፥</div> <div class="keyboard-key" data-char="፦">፦</div> <div class="keyboard-key" data-char="፧">፧</div>
+            </div>
+             <!-- Row 23: Numbers -->
+            <div class="keyboard-row">
+                 <div class="keyboard-key" data-char="፩">፩</div> <div class="keyboard-key" data-char="፪">፪</div> <div class="keyboard-key" data-char="፫">፫</div> <div class="keyboard-key" data-char="፬">፬</div> <div class="keyboard-key" data-char="፭">፭</div> <div class="keyboard-key" data-char="፮">፮</div> <div class="keyboard-key" data-char="፯">፯</div> <div class="keyboard-key" data-char="፰">፰</div> <div class="keyboard-key" data-char="፱">፱</div> <div class="keyboard-key" data-char="፲">፲</div>
+            </div>
+             <!-- Row 24: Control Keys -->
+            <div class="keyboard-row">
+                <div class="keyboard-key space" data-char=" ">Space</div>
+                <div class="keyboard-key backspace" data-action="backspace">⌫ Backspace</div>
+                <div class="keyboard-key enter" data-action="enter">Enter</div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <p><strong>Typing Method:</strong> Type phonetic equivalents (Latin letters) and they will automatically convert to Amharic characters as you type. Pressing space, punctuation, or enter finalizes the current character.</p>
+            <p><strong>Examples:</strong></p>
+            <ul>
+                <li>s + e = ሰ</li>
+                <li>s + u = ሱ</li>
+                <li>s + i = ሲ</li>
+                <li>s + a = ሳ</li>
+                <li>s + ee = ሴ (or s + e + e)</li>
+                <li>s + e (then space/punctuation) = ስ</li>
+                <li>s + o = ሶ</li>
+                <li>sh + a = ሻ</li>
+                <li>t + t + a = ጣ</li>
+            </ul>
+            <p><strong>Special Cases:</strong></p>
+             <ul>
+                <li>For the 6th form (e.g., ስ, ል, ም), type the consonant sound (e.g., 's', 'l', 'm', 'sh') and then press space or punctuation.</li>
+                <li>Some sounds require multiple letters (e.g., 'sh', 'ch', 'ny', 'zh', 'ts', 'gn', 'tt', 'pp'). Use 'pp' for ጰ/ጳ sounds and 'p' for ፐ/ፓ sounds.</li>
+                <li>Use an apostrophe (') before standalone vowels: 'a -> አ, 'u -> ኡ, 'i -> ኢ, 'aa -> ኣ, 'ee -> ኤ, 'e -> እ, 'o -> ኦ.</li>
+            </ul>
+            <p>You can also click on the Amharic characters or keys above to insert them directly.</p>
+        </div>
+    </div>
+
     <script>
         const inputText = document.getElementById('inputText');
         const keyboardContainer = document.querySelector('.keyboard');
         let currentBuffer = ''; // Stores the sequence of typed Latin letters
         let lastConversionLength = 0; // Track length of last Latin sequence converted
 
-        // --- Phonetic Mapping (Keep the existing amharicMap) ---
+        // --- Phonetic Mapping ---
         const amharicMap = {
             // Consonant + Vowel combinations (Sorted by Latin length desc)
             'hhwa': 'ሗ', 'hhua': 'ሗ',
@@ -40,7 +357,7 @@
             'dwa': 'ዷ', 'dua': 'ዷ',
             'jwa': 'ጇ', 'jua': 'ጇ',
             'gwa': 'ጓ', 'gua': 'ጓ',
-            'pwa': 'ጷ', 'pua': 'ጷ', // For ጰ series
+            'pwa': 'ጷ', 'pua': 'ጷ', // For ጰ series - Use 'pp' instead below
             'fwa': 'ፏ', 'fua': 'ፏ',
             'ppwa': 'ፗ', 'ppua': 'ፗ', // Use 'pp' for ፐ series 'pwa'
 
@@ -61,7 +378,7 @@
             'de': 'ደ', 'du': 'ዱ', 'di': 'ዲ', 'daa': 'ዳ', 'dee': 'ዴ', 'd': 'ድ', 'do': 'ዶ',
             'je': 'ጀ', 'ju': 'ጁ', 'ji': 'ጂ', 'jaa': 'ጃ', 'jee': 'ጄ', 'j': 'ጅ', 'jo': 'ጆ',
             'ge': 'ገ', 'gu': 'ጉ', 'gi': 'ጊ', 'gaa': 'ጋ', 'gee': 'ጌ', 'g': 'ግ', 'go': 'ጎ',
-            'ppe': 'ጰ', 'ppu': 'ጱ', 'ppi': 'ጲ', 'ppaa': 'ጳ', 'ppee': 'ጴ', 'pp': 'ጵ', 'ppo': 'ጶ', // Use 'pp' for ጰ series
+            'ppe': 'ጰ', 'ppu': 'ጱ', 'ppi': 'ጲ', 'ppaa': 'ጳ', 'ppee': 'ጴ', 'pp': 'ጵ', 'ppo': 'ጶ', 'ppwa': 'ጷ', // Use 'pp' for ጰ series
             'fe': 'ፈ', 'fu': 'ፉ', 'fi': 'ፊ', 'faa': 'ፋ', 'fee': 'ፌ', 'f': 'ፍ', 'fo': 'ፎ',
             'pe': 'ፐ', 'pu': 'ፑ', 'pi': 'ፒ', 'paa': 'ፓ', 'pee': 'ፔ', 'p': 'ፕ', 'po': 'ፖ', // Use 'p' for ፐ series
 
@@ -76,13 +393,15 @@
         // Map base consonant sounds to their 6th form for finalization
         const sixthFormMap = {
              'h': 'ህ', 'l': 'ል', 'hh': 'ሕ', 'm': 'ም', 'ss': 'ሥ', 'r': 'ር', 's': 'ስ',
-             'sh': 'ሽ', 'q': 'ቅ', 'b': 'ብ', 't': 'ት', 'ch': 'ች', 'h': 'ኅ', // Note: 'h' is ambiguous, might need 'xh' or similar for ኅ
-             'n': 'ን', 'ny': 'ኝ', 'a': 'እ', // Using 'a' for 'እ' 6th form
+             'sh': 'ሽ', 'q': 'ቅ', 'b': 'ብ', 't': 'ት', 'ch': 'ች', // 'h': 'ኅ', // Ambiguous 'h' removed, use 'hh' or specific input
+             'n': 'ን', 'ny': 'ኝ', 'gn': 'ኝ', // Added gn
+             // 'a': 'እ', // Removed 'a' -> 'እ' finalization, use explicit 'e
              'k': 'ክ', 'kx': 'ኽ', 'w': 'ው', '´': 'ዕ', // Using '´' (backtick) for 'ዕ' 6th form
              'z': 'ዝ', 'zh': 'ዥ', 'y': 'ይ', 'd': 'ድ', 'j': 'ጅ', 'g': 'ግ',
              'tt': 'ጥ', 'cch': 'ጭ', 'pp': 'ጵ', 'ts': 'ፅ', 'f': 'ፍ', 'p': 'ፕ',
              // Add single vowels if they should finalize to a specific form on space
-             'e': 'እ', 'i': 'ኢ', 'o': 'ኦ', 'u': 'ኡ' // Example: finalize 'e' to 'እ'
+             'e': 'እ', // Finalize 'e' to 'እ'
+             // 'i': 'ኢ', 'o': 'ኦ', 'u': 'ኡ' // Usually vowels don't finalize to 6th form
         };
 
         // --- Helper Functions ---
@@ -91,11 +410,15 @@
             const start = inputText.selectionStart;
             const end = inputText.selectionEnd;
             const text = inputText.value;
-            const positionBeforeInsertion = start - replaceLength; // Calculate position before potential replacement
+            // Calculate position before the characters to be replaced
+            const positionBeforeReplacement = start - replaceLength;
 
-            inputText.value = text.substring(0, positionBeforeInsertion) + textToInsert + text.substring(end);
-            // Place cursor right after the inserted text
-            inputText.selectionStart = inputText.selectionEnd = positionBeforeInsertion + textToInsert.length;
+            // Ensure position is not negative
+            const effectiveStart = Math.max(0, positionBeforeReplacement);
+
+            inputText.value = text.substring(0, effectiveStart) + textToInsert + text.substring(end);
+            // Place cursor right after the newly inserted text
+            inputText.selectionStart = inputText.selectionEnd = effectiveStart + textToInsert.length;
             inputText.focus();
             // Trigger input event for frameworks or other listeners
             inputText.dispatchEvent(new Event('input', { bubbles: true }));
@@ -107,34 +430,24 @@
             const end = inputText.selectionEnd;
 
             if (start === end && start > 0) {
-                // Check if we are deleting a character that was part of the last conversion
-                const deletedChar = inputText.value.substring(start - 1, start);
-                // Simple approach: If backspacing right after a conversion, clear the buffer.
-                // A more complex approach would involve trying to "undo" the conversion.
-                if (lastConversionLength > 0 && start === inputText.selectionEnd) {
-                     // Maybe clear buffer if backspacing immediately after conversion?
-                     // currentBuffer = ''; // This might be too aggressive
-                }
-                 lastConversionLength = 0; // Reset conversion tracking on backspace
-
-                // Perform standard backspace
+                // Simple backspace: Delete character before cursor
                 inputText.value = inputText.value.substring(0, start - 1) + inputText.value.substring(end);
                 inputText.selectionStart = inputText.selectionEnd = start - 1;
-
             } else if (start !== end) {
                 // Delete selection
                 inputText.value = inputText.value.substring(0, start) + inputText.value.substring(end);
                 inputText.selectionStart = inputText.selectionEnd = start;
-                lastConversionLength = 0; // Reset conversion tracking
             }
-            currentBuffer = ''; // Clear buffer on any backspace for simplicity
+            // Clear buffer on any backspace for simplicity, prevents complex undo logic
+            currentBuffer = '';
+            lastConversionLength = 0;
             inputText.focus();
             inputText.dispatchEvent(new Event('input', { bubbles: true }));
         }
 
         function handleEnter() {
              finalizeBuffer(); // Finalize before newline
-             insertText('\n');
+             insertText('\n'); // Insert newline at current cursor position
              currentBuffer = ''; // Clear buffer after enter
              lastConversionLength = 0;
         }
@@ -143,55 +456,68 @@
         function processBuffer() {
             if (!currentBuffer) {
                 lastConversionLength = 0;
-                return false;
+                return false; // Nothing to process
             }
 
-            let foundMatch = false;
+            let bufferProcessed = false; // Flag to check if any part of the buffer was processed in this call
+            let originalBuffer = currentBuffer; // Keep original buffer for potential recursion check
+
+            // Check from longest match to shortest
             const sortedKeys = Object.keys(amharicMap).sort((a, b) => b.length - a.length);
 
             for (const key of sortedKeys) {
-                // Check if the *end* of the buffer matches a key
                 if (currentBuffer.endsWith(key)) {
                     const amharicChar = amharicMap[key];
                     // Replace the matched Latin part (key) with the Amharic char
-                    insertText(amharicChar, key.length); // Replace 'key.length' characters
-                    // Remove the matched part from the buffer
+                    // The 'replaceLength' is the length of the Latin key we just matched
+                    insertText(amharicChar, key.length);
+                    // Update buffer: remove the matched part from the end
                     currentBuffer = currentBuffer.slice(0, -key.length);
                     lastConversionLength = key.length; // Track length of converted sequence
-                    foundMatch = true;
-                    // Check buffer again in case the remaining part forms another character
-                    // (e.g., typing 'selam' -> process 'la' -> 'ላ', buffer becomes 'se', process 'se' -> 'ሰ')
-                    return processBuffer(); // Recursive call to process remaining buffer
+                    bufferProcessed = true; // Mark that we processed something
+
+                    // If buffer still has content, try processing the remainder recursively
+                    if (currentBuffer.length > 0) {
+                       // Avoid infinite recursion if no change happens
+                       if (currentBuffer !== originalBuffer) {
+                           processBuffer(); // Recursive call
+                       }
+                    }
+                    // Once a match is found and processed, exit the loop for this call
+                    return true; // Indicate that a conversion happened
                 }
             }
 
-             // If no direct match, keep the buffer as is for now
-             lastConversionLength = 0; // No conversion happened in this pass
-             return false;
+            // If loop finishes without finding a match at the end
+            lastConversionLength = 0; // No conversion happened in this pass
+            return false; // Indicate no conversion happened
         }
+
 
         // Finalizes the buffer, typically converting to 6th form if applicable
         function finalizeBuffer() {
-            if (!currentBuffer) return;
+            if (!currentBuffer) return; // Nothing to finalize
 
             let amharicChar = null;
             let keyLength = 0;
 
-            // Check if the entire buffer matches a 6th form key
+            // Check if the entire buffer matches a 6th form key (longest first)
             const sortedSixthKeys = Object.keys(sixthFormMap).sort((a, b) => b.length - a.length);
             for(const key of sortedSixthKeys) {
                 if (currentBuffer === key) {
                     amharicChar = sixthFormMap[key];
                     keyLength = key.length;
-                    break;
+                    break; // Found the longest matching 6th form key
                 }
             }
 
             if (amharicChar) {
-                insertText(amharicChar, keyLength); // Replace buffer with 6th form
+                // Replace the entire buffer with the 6th form character
+                insertText(amharicChar, keyLength);
             }
-            // If no 6th form match, the buffer remains as typed Latin letters (or was already processed)
-            currentBuffer = ''; // Clear buffer after finalization attempt
+            // If no 6th form match, the buffer remains as typed Latin letters (which are already in the textarea)
+            // Clear buffer regardless of whether a 6th form conversion happened
+            currentBuffer = '';
             lastConversionLength = 0;
         }
 
@@ -214,7 +540,8 @@
             } else if (action === 'enter') {
                 handleEnter();
             }
-             currentBuffer = ''; // Clear buffer after virtual key action
+             // Clear buffer after any virtual key action for clean state
+             currentBuffer = '';
              lastConversionLength = 0;
         });
 
@@ -231,16 +558,17 @@
                 return;
             }
 
-            // Ignore modifiers, arrows, etc.
+            // Ignore modifiers, arrows, etc., but finalize buffer first
             if (e.ctrlKey || e.metaKey || e.altKey || e.key.length > 1) {
-                 finalizeBuffer(); // Finalize buffer on navigation/modifier keys
+                 finalizeBuffer();
                  currentBuffer = '';
                  lastConversionLength = 0;
                  return; // Let the browser handle navigation etc.
             }
 
             // Handle Space and Punctuation: Finalize buffer first
-            if (e.key === ' ' || e.key.match(/[^a-zA-Z0-9']/)) { // Added apostrophe as potentially valid input
+            // Use a regex for common punctuation. Adjust as needed.
+            if (e.key === ' ' || e.key.match(/^[.,!?;:"(){}[\]<>/\\|`~@#$%^&*+=_\-]$/)) {
                 finalizeBuffer();
                 currentBuffer = '';
                 lastConversionLength = 0;
@@ -251,9 +579,10 @@
             // Handle letters, numbers, apostrophe
             if (e.key.match(/^[a-zA-Z0-9']$/)) {
                 e.preventDefault(); // Prevent default insertion, we'll handle it
-                currentBuffer += e.key; // Append to buffer
-                insertText(e.key); // Insert the typed Latin character for immediate feedback
-                processBuffer(); // Attempt conversion
+                const typedChar = e.key; // Store the character typed
+                currentBuffer += typedChar; // Append to buffer *before* inserting
+                insertText(typedChar); // Insert the typed Latin character for immediate feedback
+                processBuffer(); // Attempt conversion immediately after insertion
             } else {
                  // Any other unexpected key? Finalize and clear.
                  finalizeBuffer();
